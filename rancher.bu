@@ -1,0 +1,28 @@
+variant: fcos
+version: 1.3.0
+passwd:
+  users:
+    - name: core
+      password_hash: $y$j9T$00VqfEmcXhNOmeTAiHfH10$noylOed6p8yDzJBLdkhP.EuBUgtYD/8o.lXbcQ6DojB
+systemd:
+  units:
+    - name: docker.rancher.service
+      enabled: true
+      contents: |-
+        [Unit]
+        Description=Rancher Admin Container
+        After=docker.service
+        Requires=docker.service network.target network-online.target
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        TimeoutStartSec=0
+        ExecStartPre=-/usr/bin/docker stop %n
+        ExecStartPre=-/usr/bin/docker rm %n
+        ExecStartPre=/usr/bin/docker pull rancher/rancher
+        ExecStart=/usr/bin/docker run -d --restart=always -p 80:80 -p 443:443 --privileged rancher/rancher
+        ExecStop=/usr/bin/docker stop -t 15 %n
+
+        [Install]
+        WantedBy=multi-user.target
