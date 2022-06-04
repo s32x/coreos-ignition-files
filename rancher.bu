@@ -21,7 +21,7 @@ systemd:
         ExecStartPre=-/usr/bin/docker stop %n
         ExecStartPre=-/usr/bin/docker rm %n
         ExecStartPre=/usr/bin/docker pull rancher/rancher
-        ExecStart=/usr/bin/docker run -d --restart=always -p 9000:80 -p 9443:443 --privileged rancher/rancher
+        ExecStart=/usr/bin/docker run -d --restart=always -p 8080:80 -p 8443:443 --privileged rancher/rancher
         ExecStop=/usr/bin/docker stop -t 15 %n
 
         [Install]
