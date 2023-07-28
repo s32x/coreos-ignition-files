@@ -3,7 +3,7 @@ version: 1.3.0
 passwd:
   users:
     - name: core
-      password_hash: $y$j9T$00VqfEmcXhNOmeTAiHfH10$noylOed6p8yDzJBLdkhP.EuBUgtYD/8o.lXbcQ6DojB
+      password_hash: $y$j9T$Vhm6Y9a1OR99ON8GzE7yb1$/GmiNaqH2GeVBeJoAaZ9XcLslJOF4KV2amgBSN9zJr0
 systemd:
   units:
     - name: docker.portainer.service
